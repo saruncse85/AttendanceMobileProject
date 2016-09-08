@@ -1,0 +1,97 @@
+package arun.com.attendancesystem.bean;
+
+/**
+ * Created by asundaramoorthy on 7/6/2016.
+ */
+public class StudentFees {
+
+    private String batchName;
+
+    private String studentName;
+
+    private String monthYear;
+
+    private int noOfClassesEnrolled;
+
+    private int noOfDays;
+
+    private int daysPresent;
+
+    private int daysAbsent;
+
+    private double fees;
+
+    private double rate;
+
+    public String getBatchName() {
+        return batchName;
+    }
+
+    public void setBatchName(String batchName) {
+        this.batchName = batchName;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public String getMonthYear() {
+        return monthYear;
+    }
+
+    public void setMonthYear(String monthYear) {
+        this.monthYear = monthYear;
+    }
+
+    public int getNoOfDays() {
+        return noOfDays;
+    }
+
+    public void setNoOfDays(int noOfDays) {
+        this.noOfDays = noOfDays;
+    }
+
+    public int getDaysPresent() {
+        return daysPresent;
+    }
+
+    public void setDaysPresent(int daysPresent) {
+        this.daysPresent = daysPresent;
+    }
+
+    public int getDaysAbsent() {
+        return daysAbsent;
+    }
+
+    public void setDaysAbsent(int daysAbsent) {
+        this.daysAbsent = daysAbsent;
+    }
+
+    public double getFees() {
+        return fees;
+    }
+
+    public void setFees(double fees) {
+        this.fees = fees;
+    }
+
+    public int getNoOfClassesEnrolled() {
+        return noOfClassesEnrolled;
+    }
+
+    public void setNoOfClassesEnrolled(int noOfClassesEnrolled) {
+        this.noOfClassesEnrolled = noOfClassesEnrolled;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+}

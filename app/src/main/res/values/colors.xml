@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#fdfefe</color>
+
+
+    <color name="greyed_out">#c7c7c7</color>
+    <color name="present">#2EFE2E</color>
+    <color name="absent">#FF0000</color>
+    <color name="weekend">#FE9A2E</color>
+    <color name="weekday">#4b82ff</color>
+
+    <color name="daysEnrolled">#000000</color>
+    <color name="summer">#44eebd82</color>
+    <color name="fall">#44d8d27e</color>
+    <color name="winter">#44a1c1da</color>
+    <color name="spring">#448da64b</color>
+
+    <color name="totalFees">#FF4000</color>
+
+    <color name="actionsBackground">#cc0052</color>
+    <color name="actionsText">#00e600</color>
+
+    <color name="appBackground">#dfff80</color>
+    <color name="actionBtnColor">#660033</color>
+
+</resources>

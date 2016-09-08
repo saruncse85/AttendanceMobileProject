@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="2"
+    android:rowCount="8"
+    android:orientation="vertical"
+    tools:context=".student.AddStudentActivity">
+
+    <TextView
+        android:layout_columnSpan="2"
+        android:layout_gravity="center_horizontal"
+        android:text="Enter Student Information"
+        android:textColor="#0101DF" />
+
+    <TextView
+        android:text="Name:"
+        android:layout_row="1"
+        android:layout_column="0" />
+
+    <EditText
+        android:id="@+id/studentName"
+        android:hint="Name"
+        android:ems="10"
+        android:layout_row="1"
+        android:layout_column="1"/>
+
+    <TextView
+        android:text="Batch:"
+        android:layout_row="2"
+        android:layout_column="0"/>
+
+    <Spinner android:id="@+id/spinBatchName"
+        android:layout_row="2"
+        android:layout_column="1" />
+
+   <!-- <EditText
+        android:id="@+id/batchName"
+        android:ems="10"
+        android:layout_row="2"
+        android:layout_column="1"/> -->
+
+    <TextView
+        android:text="No.of.days/week:"
+        android:layout_row="3"
+        android:layout_column="0" />
+
+    <EditText
+        android:id="@+id/daysPerWeek"
+        android:layout_row="3"
+        android:layout_column="1"
+        android:ems="10" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Parent Name:"
+        android:layout_row="4"
+        android:layout_column="0"/>
+
+    <EditText
+        android:id="@+id/parentName"
+        android:layout_row="4"
+        android:layout_column="1"
+        android:ems="10" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Date:"
+        android:layout_row="5"
+        android:layout_column="0"/>
+
+    <EditText
+        android:id="@+id/startDate"
+        android:layout_row="5"
+        android:layout_column="1"
+        android:hint="Start Date"
+        android:onClick="startDatePickerClick"
+        android:selectAllOnFocus="true"
+        android:ems="10" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="End Date:"
+        android:layout_row="6"
+        android:layout_column="0"/>
+
+    <EditText
+        android:id="@+id/endDate"
+        android:layout_row="6"
+        android:layout_column="1"
+        android:hint="End Date"
+        android:onClick="endDatePickerClick"
+        android:selectAllOnFocus="true"
+        android:ems="10" />
+
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_row="7"
+        android:layout_columnSpan="2">
+
+        <Button
+            android:id="@+id/btnSaveStudent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Save Student"
+            android:onClick="saveStudent"/>
+
+        <Button
+            android:id="@+id/btnClearContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Clear"
+            android:onClick="clearContents"/>
+
+    </LinearLayout>
+
+</GridLayout>
+

@@ -1,0 +1,141 @@
+package arun.com.attendancesystem.db;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+/**
+ * Created by asundaramoorthy on 4/14/2016.
+ * Description Database Base class for Attendance application
+ */
+public class AttendanceDBHelper extends SQLiteOpenHelper{
+
+    private SQLiteDatabase dbInstance;
+
+    public static final String DATABASE_NAME = "SQLiteExample.db";
+    public static final int DATABASE_VERSION = 3;
+
+    //BATCH TABLE DETAILS
+    public static final String BATCH_TABLE_NAME = "ATTN_BATCH";
+    public static final String BATCH_COLUMN_ID = "_id";
+    public static final String BATCH_COLUMN_NAME = "name";
+    public static final String BATCH_COLUMN_DELETED_FLAG = "deleted_flag";
+    public static final String BATCH_COLUMN_CREATED_ON = "created_on";
+    public static final String BATCH_COLUMN_CREATED_BY = "created_by";
+
+    //STUDENT TABLE DETAILS
+    public static final String STU_TABLE_NAME = "ATTN_STUDENT";
+    public static final String STU_COL_ID = "_id";
+    public static final String STU_COL_NAME = "name";
+    public static final String STU_COL_BATCH_NAME = "batch_name";
+    public static final String STU_COL_DAYS_PER_WEEK = "days_per_week";
+    public static final String STU_COL_RATE = "rate";
+    public static final String STU_COL_PARENT = "parent_name";
+    public static final String STU_COL_START_DATE = "start_date";
+    public static final String STU_COL_END_DATE = "end_date";
+
+    //ATTENDANCE TABLE DETAILS
+    public static final String ATTN_TABLE_NAME = "ATTN_ATTENDANCE";
+    public static final String ATTN_COL_ID = "_id";
+    public static final String ATTN_COL_BATCH_NAME = "batch_name";
+    public static final String ATTN_COL_STUDENT_NAME = "student_name";
+    public static final String ATTN_COL_VALUE_DATE = "value_date";
+    public static final String ATTN_COL_PRESENT_ABSENT = "present_absent";
+    public static final String ATTN_COL_CREATED_ON = "created_on";
+    public static final String ATTN_COL_CREATED_BY = "created_by";
+    public static final String ATTN_COL_DELETED = "deleted";
+
+    public AttendanceDBHelper(Context context) {
+        super(context, DATABASE_NAME, null,DATABASE_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        this.dbInstance = db;
+    }
+
+    public void createTables() {
+        dbInstance = getWritableDatabase();
+        // CREATE BATCH TABLE
+        dbInstance.execSQL("CREATE TABLE IF NOT EXISTS "+BATCH_TABLE_NAME+"("+
+                BATCH_COLUMN_ID+" INTEGER PRIMARY KEY, "+
+                BATCH_COLUMN_NAME+" TEXT, "+
+                BATCH_COLUMN_DELETED_FLAG+" TEXT, "+
+                BATCH_COLUMN_CREATED_ON +" LONG, "+
+                BATCH_COLUMN_CREATED_BY+" TEXT)"
+        );
+        //CREATE STUDENT TABLE
+        dbInstance.execSQL("CREATE TABLE IF NOT EXISTS "+STU_TABLE_NAME+"("+
+                STU_COL_ID+" INTEGER PRIMARY_KEY, "+
+                STU_COL_NAME+" TEXT, "+
+                STU_COL_BATCH_NAME+" TEXT, "+
+                STU_COL_DAYS_PER_WEEK+" INTEGER, "+
+                STU_COL_RATE+" TEXT, "+
+                STU_COL_PARENT+ " TEXT,"+
+                STU_COL_START_DATE+" LONG,"+
+                STU_COL_END_DATE+ " LONG)"
+        );
+        //CREATE ATTENDANCE TABLE
+        dbInstance.execSQL("CREATE TABLE IF NOT EXISTS "+ATTN_TABLE_NAME+" ("+
+                ATTN_COL_ID+" INTEGER PRIMARY_KEY, "+
+                ATTN_COL_BATCH_NAME+" TEXT, "+
+                ATTN_COL_STUDENT_NAME+" TEXT, "+
+                ATTN_COL_VALUE_DATE+" LONG, "+
+                ATTN_COL_PRESENT_ABSENT+" INTEGER DEFAULT 0, "+
+                ATTN_COL_CREATED_ON+" LONG, "+
+                ATTN_COL_CREATED_BY+" TEXT, "+
+                ATTN_COL_DELETED+" TEXT)"
+        );
+    }
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS "+BATCH_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+STU_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+ATTN_TABLE_NAME);
+        onCreate(db);
+        db.close();
+    }
+
+    public int numberOfRows() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int numRows = (int) DatabaseUtils.queryNumEntries(db, BATCH_TABLE_NAME);
+        return numRows;
+    }
+
+    public boolean updateBatch(Integer id, String name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(BATCH_COLUMN_NAME, name);
+        contentValues.put(BATCH_COLUMN_ID, id);
+
+        db.update(BATCH_TABLE_NAME, contentValues, BATCH_COLUMN_ID +" = ? ", new String[]{Integer.toString(id)});
+        db.close();
+        return true;
+    }
+
+    public Integer deleteBatch(Integer id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(BATCH_TABLE_NAME, BATCH_COLUMN_ID+"=?",
+                new String[]{Integer.toString(id)});
+    }
+
+    public Cursor getBatch(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM "+BATCH_TABLE_NAME+" WHERE "+BATCH_COLUMN_NAME+" =?",
+                new String[]{Integer.toString(id)});
+        db.close();
+        return res;
+    }
+
+    public Cursor getAllBatchs() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM "+BATCH_TABLE_NAME, null);
+        db.close();
+        return res;
+    }
+
+
+}

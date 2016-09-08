@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddBatchActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please Enter New batch Name"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="#DF0174"
+        android:textSize="20dp"/>
+
+    <EditText
+        android:id="@+id/batchName"
+        android:layout_width="287dp"
+        android:layout_height="74dp"
+        android:layout_marginLeft="50dp"
+        android:cursorVisible="true"
+        android:hint="New Batch Name"
+        android:layout_marginBottom="10dp" />
+
+    <Button
+        android:id="@+id/btnSaveBatch"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:onClick="saveBatch"
+        android:text="Save"/>
+</LinearLayout>

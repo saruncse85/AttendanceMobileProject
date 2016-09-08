@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Arun\Android_CodeBase\AttendanceSystem\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
+        <dex dex="C:\Arun\Android_CodeBase\AttendanceSystem\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.3.0_401c37429829869ec8fa76d1ab80204b64ae975a.jar" />
+    </item>
+    <item
+        jar="C:\Arun\Android_CodeBase\AttendanceSystem\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
+        <dex dex="C:\Arun\Android_CodeBase\AttendanceSystem\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.3.0_7c91942adeeb89b74c12e15c843651ace9296c0b.jar" />
+    </item>
+    <item
+        jar="C:\Arun\Android_CodeBase\AttendanceSystem\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="debf30ce0a7560396b6235edef77e447006454c2">
+        <dex dex="C:\Arun\Android_CodeBase\AttendanceSystem\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.3.0_3d2cb90f5338e19593df94195eadd98e6bbee409.jar" />
+    </item>
+    <item
+        jar="C:\Arun\Android_CodeBase\AttendanceSystem\app\build\intermediates\exploded-aar\com.android.support\design\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="f0001e71cea6ae432a00021c6f727f5ef0f3d27e">
+        <dex dex="C:\Arun\Android_CodeBase\AttendanceSystem\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.3.0_f5c1d1340636b141a0416d8428fbd297137863fb.jar" />
+    </item>
+    <item
+        jar="C:\Arun\Android_CodeBase\AttendanceSystem\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
+        <dex dex="C:\Arun\Android_CodeBase\AttendanceSystem\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.3.0_bb56c5787e8d74b2bab01666bb908c8994b868da.jar" />
+    </item>
+    <item
+        jar="C:\Users\asundaramoorthy\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.3.0\support-annotations-23.3.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="C:\Arun\Android_CodeBase\AttendanceSystem\app\build\intermediates\pre-dexed\debug\support-annotations-23.3.0_456ab5069899706e6e51e700ca2c8aaa918d9a86.jar" />
+    </item>
+    <item
+        jar="C:\Arun\Android_CodeBase\AttendanceSystem\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\libs\internal_impl-23.3.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="4da5a4d697d32497c6f85567a5112e62fdfd0676">
+        <dex dex="C:\Arun\Android_CodeBase\AttendanceSystem\app\build\intermediates\pre-dexed\debug\internal_impl-23.3.0_ba7cd481de02f57df49b7a7a6a6fd9a181aec76f.jar" />
+    </item>
+    <item
+        jar="C:\Arun\Android_CodeBase\AttendanceSystem\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
+        <dex dex="C:\Arun\Android_CodeBase\AttendanceSystem\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.3.0_adf2878a4002dd5dc272f91849fd9f9f80e70d78.jar" />
+    </item>
+
+</items>

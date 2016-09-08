@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/mainMenu_Group">
+        <item android:id="@+id/mnuAddBatch" android:title="Add Batch"/>
+        <item android:id="@+id/mnuAddStu" android:title="Add Student"/>
+        <item android:id="@+id/mnuAttReg" android:title="Attendance Register"/>
+        <item android:id="@+id/mnuViewReport" android:title="View Report"/>
+    </group>
+</menu>

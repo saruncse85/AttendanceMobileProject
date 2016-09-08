@@ -1,0 +1,60 @@
+package arun.com.attendancesystem;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.*;
+
+import arun.com.attendancesystem.student.AddStudentActivity;
+
+public class ActionsActivity extends AppCompatActivity {
+
+    public final static String NEW_BATCH_ID = "NEW_BATCH_ID";
+    public final static String NEW_STUDENT_ID = "NEW_STUDENT_ID";
+
+    public final static String MA_BATCH_ID = "MA_BATCH_ID";
+    public final static String MA_STUDENT_ID = "MA_STUDENT_ID";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.actions_activity);
+        Log.d(AttendanceConstants.LOG_APP, "OnCreate called for ActionsActivity");
+    }
+
+    public void handleClickAction(View view) {
+        Log.d(AttendanceConstants.LOG_APP, "START ActionsActivity.handleClickAction()");
+        switch(view.getId()) {
+            case R.id.addBatchBtn:
+                Log.d(AttendanceConstants.LOG_APP, "Add Batch button clicked");
+                Intent batchIntent = new Intent(getApplicationContext(), AddBatchActivity.class);
+                batchIntent.putExtra(NEW_BATCH_ID, 0);
+                startActivity(batchIntent);
+                return;
+            case R.id.addStudentBtn:
+                Log.d(AttendanceConstants.LOG_APP, "Add Student button clicked");
+                Intent studentIntent = new Intent(getApplicationContext(), AddStudentActivity.class);
+                studentIntent.putExtra(NEW_STUDENT_ID, 0);
+                startActivity(studentIntent);
+                return;
+            case R.id.markAttendanceBtn:
+                Log.d(AttendanceConstants.LOG_APP, "Mark Attendance button clicked");
+                Intent markAttendanceIntent = new Intent(getApplicationContext(), MarkAttendance.class);
+                markAttendanceIntent.putExtra(MA_BATCH_ID, 0);
+                markAttendanceIntent.putExtra(MA_STUDENT_ID, 0);
+                startActivity(markAttendanceIntent);
+                return;
+            case R.id.attendCalViewBtn:
+                Log.d(AttendanceConstants.LOG_APP, "Attendance Calendar view button clicked");
+                Intent calendarIntent = new Intent(getApplicationContext(), CalendarView.class);
+                startActivity(calendarIntent);
+                return;
+            case R.id.feeCalcBtn:
+                Log.d(AttendanceConstants.LOG_APP, "Calculate fees function invoked");
+                return;
+        }
+        Log.d(AttendanceConstants.LOG_APP, "END ActionsActivity.handleClickAction()");
+    }
+}

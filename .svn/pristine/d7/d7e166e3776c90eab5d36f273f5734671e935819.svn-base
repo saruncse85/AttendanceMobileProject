@@ -1,0 +1,144 @@
+package arun.com.attendancesystem.student;
+
+import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.database.Cursor;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
+
+import arun.com.attendancesystem.ActionsActivity;
+import arun.com.attendancesystem.AttendanceConstants;
+import arun.com.attendancesystem.R;
+import arun.com.attendancesystem.db.AttendanceDBHelper;
+import arun.com.attendancesystem.db.BatchDBHelper;
+import arun.com.attendancesystem.db.StudentDBHelper;
+
+public class AddStudentActivity extends AppCompatActivity {
+
+    int studentID = 0;
+    EditText studentName;
+  //  EditText studentBatch;
+    EditText daysPerWeek;
+    EditText parentName;
+    EditText startDate;
+    EditText endDate;
+    Button btnSaveStudent;
+    Button btnClear;
+
+    private DatePickerDialog startDatePicker;
+    private DatePickerDialog endDatePicker;
+    private SimpleDateFormat dateFormat;
+
+    Spinner spinStuBatchName;
+    StudentDBHelper studentHelper;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        studentID = getIntent().getIntExtra(ActionsActivity.NEW_STUDENT_ID, 0);
+        setContentView(R.layout.activity_add_student);
+
+        studentName = (EditText)findViewById(R.id.studentName);
+        //studentBatch = (EditText)findViewById(R.id.batchName);
+        daysPerWeek = (EditText)findViewById(R.id.daysPerWeek);
+        parentName = (EditText)findViewById(R.id.parentName);
+
+        spinStuBatchName = (Spinner)findViewById(R.id.spinBatchName);
+
+        btnSaveStudent = (Button)findViewById(R.id.btnSaveStudent);
+        btnClear = (Button)findViewById(R.id.btnClearContent);
+
+        studentHelper = new StudentDBHelper(getApplicationContext());
+        List<String> list = new ArrayList<String>();
+        list.add("--Select Batch--");
+        list.addAll(studentHelper.getAllBatchNames());
+
+        Log.d(AttendanceConstants.LOG_APP, "spinner elements "+list);
+        ArrayAdapter<String> batchNameAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, list);
+        batchNameAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinStuBatchName.setAdapter(batchNameAdapter);
+
+
+        dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        startDate = (EditText)findViewById(R.id.startDate);
+        startDate.setInputType(InputType.TYPE_NULL);
+
+        endDate = (EditText)findViewById(R.id.endDate);
+        endDate.setInputType(InputType.TYPE_NULL);
+
+
+        Calendar newCalendar = Calendar.getInstance();
+        startDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener(){
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                startDate.setText(dateFormat.format(newDate.getTime()));
+            }
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+        endDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                endDate.setText(dateFormat.format(newDate.getTime()));
+            }
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+    }
+
+    public void saveStudent(View view) {
+        Log.d(AttendanceConstants.LOG_APP,"START: saveStudent");
+        String studentNameStr = studentName.getText().toString();
+        //String studentBatchStr = studentBatch.getText().toString();
+        String daysPerWeekStr = daysPerWeek.getText().toString();
+        String parentNameStr = parentName.getText().toString();
+        String startDateStr = startDate.getText().toString();
+        String endDateStr = endDate.getText().toString();
+
+        String studentBatchStr = spinStuBatchName.getSelectedItem().toString();
+        studentHelper.insertStudent(studentNameStr, studentBatchStr, daysPerWeekStr, parentNameStr, startDateStr, endDateStr);
+        Toast.makeText(AddStudentActivity.this, "Created Student "+studentNameStr+" successfully", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(), ActionsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        Log.d(AttendanceConstants.LOG_APP,"END: saveStudent");
+    }
+
+    public void clearContents(View view) {
+        Log.d(AttendanceConstants.LOG_APP,"START: clearContents");
+        studentName.setText("");
+       // studentBatch.setText("");
+        daysPerWeek.setText("");
+        parentName.setText("");
+        startDate.setText("");
+        endDate.setText("");
+
+        spinStuBatchName.setSelection(0);
+        Log.d(AttendanceConstants.LOG_APP,"END: clearContents");
+    }
+
+    public void startDatePickerClick(View view) {
+        startDatePicker.show();
+    }
+
+    public void endDatePickerClick(View view) {
+        endDatePicker.show();
+    }
+}

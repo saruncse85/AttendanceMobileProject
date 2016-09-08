@@ -1,0 +1,11 @@
+Following features are available in this Attendance system app
+
+1. Creating new Batch and student.
+2. Creating student for each batch
+   Can choose 2 days/week or 3 days/week. 
+   2 days represent - Tuesday & Thursday
+   3 days represent - Tuesday, Thursday, Friday
+3. Marking attendance for each student
+4. View attendance
+5. Calculate fees based on their selected schedule and 
+   no of days present

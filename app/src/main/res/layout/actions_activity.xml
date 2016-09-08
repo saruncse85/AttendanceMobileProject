@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/appBackground"
+    tools:context=".ActionsActivity">
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#FF4000"
+        android:text="@string/app_name"/>
+
+    <Button
+        android:id="@+id/addBatchBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+        android:text="New Batch"
+        android:background="@color/actionsBackground"
+        android:textColor="@color/actionsText"
+        android:onClick="handleClickAction"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/addStudentBtn"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="handleClickAction"
+        android:textColor="@color/actionsText"
+        android:background="@color/actionsBackground"
+        android:text="New Student"/>
+
+    <Button
+        android:id="@+id/markAttendanceBtn"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="handleClickAction"
+        android:textColor="@color/actionsText"
+        android:background="@color/actionsBackground"
+        android:text="Mark Attendance"/>
+
+    <Button
+        android:id="@+id/attendCalViewBtn"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="handleClickAction"
+        android:textColor="@color/actionsText"
+        android:background="@color/actionsBackground"
+        android:text="View Attendance" />
+
+    <Button
+        android:id="@+id/feeCalcBtn"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:text="Calculate Fees"
+        android:layout_width="match_parent"
+        android:onClick="handleClickAction"
+        android:textColor="@color/actionsText"
+        android:background="@color/actionsBackground"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

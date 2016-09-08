@@ -1,0 +1,149 @@
+package arun.com.attendancesystem;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.GridLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import arun.com.attendancesystem.bean.StudentFees;
+import arun.com.attendancesystem.bo.CalculateFeesBO;
+import arun.com.attendancesystem.db.MarkAttendanceHelper;
+import arun.com.attendancesystem.db.StudentDBHelper;
+import arun.com.attendancesystem.util.AttendanceUtil;
+
+public class CalculateFeesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    Spinner spinBatch;
+    Spinner spinStudent;
+    Spinner spinMonthYear;
+
+    int no_of_days_classes;
+    int no_of_days_present;
+    int no_of_days_absent;
+    double totalFees;
+
+    String batchName;
+    String studentName;
+    String monthYear;
+
+    private StudentDBHelper studentDBHelper;
+    private MarkAttendanceHelper markAttendanceHelper;
+
+    private ArrayAdapter<String> studentNameAdapter;
+    private List<String> studentList;
+    private List<String> monthYearList;
+
+    private GridLayout feeDetailsGrid;
+
+    private CalculateFeesBO calculateFeesBO;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_calculate_fees);
+
+        feeDetailsGrid = (GridLayout)findViewById(R.id.feeDetailsGrid);
+        feeDetailsGrid.setVisibility(View.GONE);
+
+        studentDBHelper = new StudentDBHelper(getApplicationContext());
+        markAttendanceHelper = new MarkAttendanceHelper(getApplicationContext());
+
+        spinBatch = (Spinner)findViewById(R.id.feeSpinBatch);
+        List<String> batchList = new ArrayList<String>();
+        batchList.add("--Select Batch--");
+        batchList.addAll(studentDBHelper.getAllBatchNames());
+
+        ArrayAdapter<String> batchNameAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, batchList);
+        batchNameAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinBatch.setAdapter(batchNameAdapter);
+        spinBatch.setOnItemSelectedListener(this);
+
+        spinStudent = (Spinner) findViewById(R.id.feeSpinStudent);
+        studentList = new ArrayList<String>();
+        studentList.add("----Select Student----");
+        studentNameAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, studentList);
+        studentNameAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinStudent.setAdapter(studentNameAdapter);
+        spinStudent.setOnItemSelectedListener(this);
+
+        spinMonthYear = (Spinner) findViewById(R.id.feeSpinMonthYear);
+        monthYearList = new ArrayList<String>();
+        monthYearList.add("----Month/Year----");
+        monthYearList.addAll(AttendanceUtil.getMonthYearList());
+
+        ArrayAdapter<String> monthYearAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, monthYearList);
+        monthYearAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinMonthYear.setAdapter(monthYearAdapter);
+        spinMonthYear.setOnItemSelectedListener(this);
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if(view.getParentForAccessibility().equals(spinBatch)) {
+            if(position > 0) {
+                batchName = parent.getSelectedItem().toString();
+                ArrayList<String> studentList = new ArrayList<String>();
+                studentList.add("---- Select Student ----");
+                studentList.addAll(markAttendanceHelper.getAllStudentsForBatch(batchName));
+
+                studentNameAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, studentList);
+                studentNameAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                spinStudent.setAdapter(studentNameAdapter);
+            }
+        } else if (view.getParentForAccessibility().equals(spinStudent)) {
+            if(position > 0) {
+                studentName = parent.getSelectedItem().toString();
+            }
+        } else if (view.getParentForAccessibility().equals(spinMonthYear)) {
+            if(position > 0) {
+                monthYear = parent.getSelectedItem().toString();
+                Log.d(AttendanceConstants.LOG_APP, "Batch Name  "+batchName);
+                Log.d(AttendanceConstants.LOG_APP, "Student Name  "+studentName);
+                Log.d(AttendanceConstants.LOG_APP, "Month/Year selected "+monthYear);
+
+                // get the attendance detail for the month selected, student & batch
+                calculateFeesBO = new CalculateFeesBO(getApplication());
+                StudentFees studentFees = calculateFeesBO.calculateStudentFees(batchName, studentName, monthYear);
+                TextView batchText = (TextView)findViewById(R.id.feeBatchNameVal);
+                batchText.setText(studentFees.getBatchName());
+
+                TextView studentText = (TextView)findViewById(R.id.feeStudentVal);
+                studentText.setText(studentFees.getStudentName());
+
+                TextView monthYearText = (TextView)findViewById(R.id.feeMonthYear);
+                monthYearText.setText(studentFees.getMonthYear());
+
+                System.out.println(studentFees.getNoOfDays());
+                TextView noOfClassText = (TextView)findViewById(R.id.feeTotalNoOfClasses);
+                System.out.println(noOfClassText);
+                noOfClassText.setText(String.valueOf(studentFees.getNoOfDays()));
+
+                TextView daysPresentText = (TextView)findViewById(R.id.feePresent);
+                daysPresentText.setText(String.valueOf(studentFees.getDaysPresent()));
+
+                TextView daysAbsentText = (TextView)findViewById(R.id.feeAbsent);
+                daysAbsentText.setText(String.valueOf(studentFees.getDaysAbsent()));
+
+                double fees = calculateFeesBO.calculateTotalFees(studentFees.getNoOfClassesEnrolled(), studentFees.getNoOfDays(), studentFees.getDaysPresent());
+
+                TextView feesText = (TextView)findViewById(R.id.feeTotalFees);
+                feesText.setText(String.valueOf(fees));
+
+                feeDetailsGrid.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+}
